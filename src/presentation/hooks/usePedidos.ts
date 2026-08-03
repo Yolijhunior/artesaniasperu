@@ -3,7 +3,8 @@ import { Pedido } from '../../domain/models/Pedido';
 import { 
   getPedidosDB, 
   insertPedidoDB, 
-  deletePedidoDB 
+  deletePedidoDB,
+  updatePedidoDB 
 } from '../../infrastructure/database/sqlite';
 
 export const usePedidos = () => {
@@ -38,6 +39,16 @@ export const usePedidos = () => {
     }
   };
 
+  const actualizarPedido = async (id: number, pedido: any) => {
+    try {
+      updatePedidoDB(id, pedido);
+      await cargarDatos();
+    } catch (err: any) {
+      setError('Error al actualizar el pedido.');
+      throw err;
+    }
+  };
+
   const eliminarPedido = async (id: number) => {
     try {
       deletePedidoDB(id);
@@ -54,6 +65,7 @@ export const usePedidos = () => {
     error,
     recargarPedidos: cargarDatos,
     registrarNuevoPedido,
+    actualizarPedido,
     eliminarPedido,
   };
 };

@@ -23,7 +23,7 @@ export const AppNavigator = () => {
         <Stack.Screen 
           name="ListadoPedidos" 
           component={ListadoPedidosScreen} 
-          options={{ headerShown: false }}  /* <-- OCULTAMOS LA BARRA NATIVA NEGRA */
+          options={{ headerShown: false }} 
         />
         <Stack.Screen 
           name="FormPedido" 

@@ -3,17 +3,25 @@ import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabaseSync('artesanias.db');
 
 export const initDatabase = () => {
+  // Verificamos si existe la columna productos, si no, recreamos o agregamos de forma segura
   db.execSync(`
     CREATE TABLE IF NOT EXISTS pedidos (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       clienteNombre TEXT NOT NULL,
       producto TEXT NOT NULL,
+      productos TEXT,
       cantidad INTEGER NOT NULL,
       precio REAL NOT NULL,
       estado TEXT NOT NULL,
       fechaRegistro TEXT NOT NULL
     );
   `);
+
+  try {
+    db.execSync(`ALTER TABLE pedidos ADD COLUMN productos TEXT;`);
+  } catch (e) {
+    // Si ya existe la columna, no hace nada
+  }
 
   db.execSync(`
     CREATE TABLE IF NOT EXISTS usuarios (
@@ -25,7 +33,6 @@ export const initDatabase = () => {
   `);
 };
 
-// Función para registrar usuario con su respectivo 'export'
 export const registrarUsuarioDB = (nombre: string, email: string, pass: string) => {
   try {
     db.runSync(
@@ -38,7 +45,6 @@ export const registrarUsuarioDB = (nombre: string, email: string, pass: string) 
   }
 };
 
-// Función para iniciar sesión
 export const loginUsuarioDB = (email: string, pass: string) => {
   try {
     const usuario: any = db.getFirstSync(
@@ -56,13 +62,40 @@ export const loginUsuarioDB = (email: string, pass: string) => {
 
 // Pedidos
 export const getPedidosDB = () => {
-  return db.getAllSync('SELECT * FROM pedidos ORDER BY id DESC;');
+  const pedidos = db.getAllSync('SELECT * FROM pedidos ORDER BY id DESC;');
+  return pedidos.map((p: any) => ({
+    ...p,
+    productos: p.productos ? JSON.parse(p.productos) : []
+  }));
 };
 
-export const insertPedidoDB = (pedido: { clienteNombre: string; producto: string; cantidad: number; precio: number; estado: string; fechaRegistro: string }) => {
+export const insertPedidoDB = (pedido: { clienteNombre: string; producto: string; productos: any; cantidad: number; precio: number; estado: string; fechaRegistro: string }) => {
   db.runSync(
-    'INSERT INTO pedidos (clienteNombre, producto, cantidad, precio, estado, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?);',
-    [pedido.clienteNombre, pedido.producto, pedido.cantidad, pedido.precio, pedido.estado, pedido.fechaRegistro]
+    'INSERT INTO pedidos (clienteNombre, producto, productos, cantidad, precio, estado, fechaRegistro) VALUES (?, ?, ?, ?, ?, ?, ?);',
+    [
+      pedido.clienteNombre, 
+      pedido.producto, 
+      JSON.stringify(pedido.productos || []), 
+      pedido.cantidad, 
+      pedido.precio, 
+      pedido.estado, 
+      pedido.fechaRegistro
+    ]
+  );
+};
+
+export const updatePedidoDB = (id: number, pedido: any) => {
+  db.runSync(
+    `UPDATE pedidos SET clienteNombre = ?, producto = ?, productos = ?, cantidad = ?, precio = ?, estado = ? WHERE id = ?;`,
+    [
+      pedido.clienteNombre,
+      pedido.producto,
+      JSON.stringify(pedido.productos || []),
+      pedido.cantidad,
+      pedido.precio,
+      pedido.estado,
+      id
+    ]
   );
 };
 

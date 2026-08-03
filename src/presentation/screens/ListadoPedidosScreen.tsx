@@ -4,6 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { usePedidos } from '../hooks/usePedidos';
 import { COLORS } from '../utils/constants';
 import { Ionicons } from '@expo/vector-icons';
+import { PedidoCard } from '../components/PedidoCard'; // <-- Componente importado
 
 export const ListadoPedidosScreen = ({ route, navigation }: any) => {
   const [busqueda, setBusqueda] = useState('');
@@ -81,16 +82,6 @@ export const ListadoPedidosScreen = ({ route, navigation }: any) => {
     ]);
   };
 
-  const getBadgeStyle = (estado: string) => {
-    switch (estado) {
-      case 'ENTREGADO': return { bg: '#e8f5e9', text: '#2e7d32' };
-      case 'EN PROCESO':
-      case 'EN_PROCESO': return { bg: '#e3f2fd', text: '#1565c0' };
-      case 'CANCELADO': return { bg: '#ffebee', text: '#c62828' };
-      default: return { bg: '#fff8e1', text: '#f57c00' };
-    }
-  };
-
   const botonesFila1 = [
     { label: 'TODOS', color: '#424242', icon: 'list-outline' },
     { label: 'PENDIENTE', color: '#FF9800', icon: 'time-outline' }
@@ -165,38 +156,15 @@ export const ListadoPedidosScreen = ({ route, navigation }: any) => {
       <FlatList
         data={pedidosFiltrados}
         keyExtractor={(item) => (item.id ? item.id.toString() : Math.random().toString())}
-        renderItem={({ item }) => {
-          const badgeInfo = getBadgeStyle(item.estado);
-          const estadoTextoLimpio = item.estado === 'EN_PROCESO' ? 'EN PROCESO' : item.estado;
-          return (
-            <View style={styles.card}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.cliente}>{item.clienteNombre}</Text>
-                <Text style={[styles.badge, { backgroundColor: badgeInfo.bg, color: badgeInfo.text }]}>{estadoTextoLimpio}</Text>
-              </View>
-              <Text style={styles.prodText}>Producto: {item.producto} (Cant: {item.cantidad})</Text>
-              <Text style={styles.priceText}>Precio Total: S/ {((item.precio || 0) * (item.cantidad || 0)).toFixed(2)}</Text>
-              <Text style={styles.fecha}>Fecha: {item.fechaRegistro}</Text>
-              
-              <View style={styles.actions}>
-                <TouchableOpacity style={styles.btnDetail} onPress={() => navigation.navigate('DetallePedido', { pedido: item })}>
-                  <Ionicons name="eye-outline" size={14} color="#fff" />
-                  <Text style={styles.btnActionText}>Ver</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.btnEdit} onPress={() => navigation.navigate('EditarPedido', { pedido: item })}>
-                  <Ionicons name="create-outline" size={14} color="#fff" />
-                  <Text style={styles.btnActionText}>Editar</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.btnDelete} onPress={() => confirmarEliminacion(item.id)}>
-                  <Ionicons name="trash-outline" size={14} color="#fff" />
-                  <Text style={styles.btnActionText}>Eliminar</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          );
-        }}
+        contentContainerStyle={{ paddingBottom: 110, paddingTop: 5 }}
+        renderItem={({ item }) => (
+          <PedidoCard 
+            item={item}
+            onVer={(pedido) => navigation.navigate('DetallePedido', { pedido })}
+            onEditar={(pedido) => navigation.navigate('EditarPedido', { pedido })}
+            onEliminar={confirmarEliminacion}
+          />
+        )}
         ListEmptyComponent={!cargando ? <Text style={styles.emptyText}>No se encontraron pedidos con esos criterios.</Text> : null}
       />
 
@@ -251,18 +219,6 @@ const styles = StyleSheet.create({
   filterChipGrid: { flex: 1, flexDirection: 'row', paddingVertical: 7, paddingHorizontal: 4, backgroundColor: '#ffffff', borderRadius: 8, borderWidth: 1, borderColor: '#d1d5db', alignItems: 'center', justifyContent: 'center', gap: 4 },
   filterText: { fontSize: 10, fontWeight: '600', color: '#4b5563' },
   filterTextActive: { color: '#ffffff', fontWeight: 'bold' },
-  card: { backgroundColor: COLORS.card, padding: 15, borderRadius: 10, marginBottom: 10, elevation: 2 },
-  cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 },
-  cliente: { fontSize: 16, fontWeight: 'bold', color: COLORS.primary },
-  badge: { fontSize: 10, fontWeight: 'bold', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 4, overflow: 'hidden' },
-  prodText: { fontSize: 14, color: COLORS.textMain, marginBottom: 2 },
-  priceText: { fontSize: 14, fontWeight: '600', color: '#444', marginBottom: 2 },
-  fecha: { fontSize: 11, color: COLORS.textMuted, marginTop: 4 },
-  actions: { flexDirection: 'row', justifyContent: 'flex-end', gap: 6, marginTop: 8, borderTopWidth: 1, borderTopColor: '#eee', paddingTop: 8 },
-  btnDetail: { backgroundColor: '#0284c7', flexDirection: 'row', alignItems: 'center', paddingVertical: 5, paddingHorizontal: 8, borderRadius: 5, gap: 3 },
-  btnEdit: { backgroundColor: '#d97706', flexDirection: 'row', alignItems: 'center', paddingVertical: 5, paddingHorizontal: 8, borderRadius: 5, gap: 3 },
-  btnDelete: { backgroundColor: COLORS.error, flexDirection: 'row', alignItems: 'center', paddingVertical: 5, paddingHorizontal: 8, borderRadius: 5, gap: 3 },
-  btnActionText: { color: '#fff', fontSize: 11, fontWeight: 'bold' },
   emptyText: { textAlign: 'center', color: COLORS.textMuted, marginTop: 40 },
   errorText: { color: COLORS.error, textAlign: 'center', marginBottom: 10 },
   fab: { position: 'absolute', right: 20, bottom: 65, backgroundColor: COLORS.primary, width: 56, height: 56, borderRadius: 28, justifyContent: 'center', alignItems: 'center', elevation: 6, shadowColor: '#000', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.3, shadowRadius: 3 },

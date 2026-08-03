@@ -608,3 +608,86 @@
 {"_e":"metro:bundling:progress","_t":1785729176147,"id":"1p","progress":0,"total":1,"current":0}
 {"_e":"metro:bundling:done","_t":1785729176532,"id":"1p","total":1,"ms":384.9846}
 {"_e":"metro:client_log","_t":1785729180053,"level":"warn","data":["The global process.env.EXPO_OS is not defined. This should be inlined by babel-preset-expo during transformation."]}
+{"_e":"root:init","_t":1785732471430,"format":"v0-jsonl","version":"57.0.11"}
+{"_e":"env:mode","_t":1785732471433,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1785732471444,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1785732473439,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\src\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1785732477109,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1785732481341,"plugins":[{"packageName":"expo-sqlite","bannerTitle":"expo-sqlite","cliBanner":false,"webpageEndpoint":"/_expo/plugins/expo-sqlite"}]}
+{"_e":"metro:instantiate","_t":1785732496270,"atlas":false,"workers":6,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1785732546952,"id":"1","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1785732546953,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785732546965,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785732547070,"id":"1","progress":0.05536332179930796,"total":51,"current":12}
+{"_e":"metro:bundling:progress","_t":1785732547160,"id":"1","progress":0.0649750096116878,"total":51,"current":13}
+{"_e":"metro:bundling:progress","_t":1785732547274,"id":"1","progress":0.08590963139120093,"total":58,"current":17}
+{"_e":"metro:bundling:progress","_t":1785732547381,"id":"1","progress":0.2450740123517302,"total":101,"current":50}
+{"_e":"metro:bundling:progress","_t":1785732547516,"id":"1","progress":0.2549750024507401,"total":101,"current":51}
+{"_e":"metro:bundling:progress","_t":1785732547631,"id":"1","progress":0.2549750024507401,"total":204,"current":57}
+{"_e":"metro:bundling:progress","_t":1785732547680,"id":"1","progress":0.2549750024507401,"total":204,"current":58}
+{"_e":"metro:bundling:progress","_t":1785732547779,"id":"1","progress":0.2549750024507401,"total":272,"current":94}
+{"_e":"metro:bundling:progress","_t":1785732547893,"id":"1","progress":0.2549750024507401,"total":283,"current":97}
+{"_e":"metro:bundling:progress","_t":1785732547993,"id":"1","progress":0.2549750024507401,"total":343,"current":139}
+{"_e":"metro:bundling:progress","_t":1785732548095,"id":"1","progress":0.26035564365066605,"total":439,"current":224}
+{"_e":"metro:bundling:progress","_t":1785732548195,"id":"1","progress":0.26035564365066605,"total":578,"current":287}
+{"_e":"metro:bundling:progress","_t":1785732548295,"id":"1","progress":0.30846203537641625,"total":686,"current":381}
+{"_e":"metro:bundling:progress","_t":1785732548396,"id":"1","progress":0.4773898834681802,"total":728,"current":503}
+{"_e":"metro:bundling:progress","_t":1785732548496,"id":"1","progress":0.5644346503347858,"total":776,"current":583}
+{"_e":"metro:bundling:progress","_t":1785732548606,"id":"1","progress":0.6739849140053912,"total":849,"current":697}
+{"_e":"metro:bundling:progress","_t":1785732548708,"id":"1","progress":0.7090383248282457,"total":861,"current":725}
+{"_e":"metro:bundling:progress","_t":1785732548808,"id":"1","progress":0.7434359598281665,"total":871,"current":751}
+{"_e":"metro:bundling:progress","_t":1785732548925,"id":"1","progress":0.8055341229119246,"total":966,"current":867}
+{"_e":"metro:bundling:progress","_t":1785732549035,"id":"1","progress":0.8809633733456449,"total":1026,"current":963}
+{"_e":"metro:bundling:progress","_t":1785732549135,"id":"1","progress":0.9299761694398586,"total":1066,"current":1028}
+{"_e":"metro:bundling:done","_t":1785732549302,"id":"1","total":1066,"ms":2349.3852}
+{"_e":"metro:client_log","_t":1785732553280,"level":"warn","data":["The global process.env.EXPO_OS is not defined. This should be inlined by babel-preset-expo during transformation."]}
+{"_e":"metro:bundling:started","_t":1785733117634,"id":"3","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1785733117634,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1785733117691,"id":"3","total":1,"ms":56.1289}
+{"_e":"metro:client_log","_t":1785733121033,"level":"warn","data":["The global process.env.EXPO_OS is not defined. This should be inlined by babel-preset-expo during transformation."]}
+{"_e":"metro:client_log","_t":1785733445821,"level":"error","data":["React has detected a change in the order of Hooks called by EditarPedidoScreen. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks\n\n   Previous render            Next render\n   ------------------------------------------------------\n1. useState                   useState\n2. useState                   useState\n3. useState                   useState\n4. useCallback                useCallback\n5. useEffect                  useEffect\n6. useState                   useState\n7. useState                   useState\n8. useState                   useEffect\n   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n"]}
+{"_e":"metro:client_log","_t":1785733446024,"level":"error","data":["[TypeError: Cannot read property 'inst' of null]"]}
+{"_e":"metro:client_log","_t":1785734007314,"level":"error","data":["[Error: Rendered fewer hooks than expected. This may be caused by an accidental early return statement.]"]}
+{"_e":"metro:client_log","_t":1785734350139,"level":"error","data":["Error al actualizar:","[Error: Call to function 'NativeDatabase.prepareSync' has been rejected.\n→ Caused by: Error code \u0001: no such column: productos]"]}
+{"_e":"metro:client_log","_t":1785734367535,"level":"error","data":["Error al actualizar:","[Error: Call to function 'NativeDatabase.prepareSync' has been rejected.\n→ Caused by: Error code \u0001: no such column: productos]"]}
+{"_e":"root:init","_t":1785735195894,"format":"v0-jsonl","version":"57.0.11"}
+{"_e":"env:mode","_t":1785735195896,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1785735195904,"mode":"development","files":[],"env":{}}
+{"_e":"devserver:start","_t":1785735196918,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\src\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1785735198901,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1785735203264,"plugins":[{"packageName":"expo-sqlite","bannerTitle":"expo-sqlite","cliBanner":false,"webpageEndpoint":"/_expo/plugins/expo-sqlite"}]}
+{"_e":"metro:instantiate","_t":1785735212148,"atlas":false,"workers":6,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1785735218380,"id":"1","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1785735218380,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785735218384,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785735218489,"id":"1","progress":0.057843294343855156,"total":79,"current":19}
+{"_e":"metro:bundling:progress","_t":1785735218596,"id":"1","progress":0.0856632956573468,"total":205,"current":60}
+{"_e":"metro:bundling:progress","_t":1785735218697,"id":"1","progress":0.1222713486265966,"total":306,"current":107}
+{"_e":"metro:bundling:progress","_t":1785735218796,"id":"1","progress":0.19443238886477773,"total":381,"current":168}
+{"_e":"metro:bundling:progress","_t":1785735218916,"id":"1","progress":0.2229397385481985,"total":485,"current":229}
+{"_e":"metro:bundling:progress","_t":1785735219021,"id":"1","progress":0.24133515086312288,"total":572,"current":281}
+{"_e":"metro:bundling:progress","_t":1785735219122,"id":"1","progress":0.29767396305382826,"total":647,"current":353}
+{"_e":"metro:bundling:progress","_t":1785735219222,"id":"1","progress":0.348213626877617,"total":727,"current":429}
+{"_e":"metro:bundling:progress","_t":1785735219324,"id":"1","progress":0.5375194791370371,"total":757,"current":555}
+{"_e":"metro:bundling:progress","_t":1785735219424,"id":"1","progress":0.5894034588506764,"total":818,"current":628}
+{"_e":"metro:bundling:progress","_t":1785735219524,"id":"1","progress":0.7519194092620665,"total":858,"current":744}
+{"_e":"metro:bundling:progress","_t":1785735219628,"id":"1","progress":0.7632847140387641,"total":934,"current":816}
+{"_e":"metro:bundling:progress","_t":1785735219728,"id":"1","progress":0.827295878757279,"total":973,"current":885}
+{"_e":"metro:bundling:progress","_t":1785735219834,"id":"1","progress":0.888766860039623,"total":1013,"current":955}
+{"_e":"metro:bundling:progress","_t":1785735219951,"id":"1","progress":0.9640010748403278,"total":1046,"current":1027}
+{"_e":"metro:bundling:progress","_t":1785735220055,"id":"1","progress":0.996215708218549,"total":1056,"current":1054}
+{"_e":"metro:bundling:progress","_t":1785735221443,"id":"1","progress":0.9981069573576675,"total":1056,"current":1055}
+{"_e":"metro:bundling:progress","_t":1785735221550,"id":"1","progress":0.9981541305272708,"total":1083,"current":1082}
+{"_e":"metro:bundling:progress","_t":1785735221641,"id":"1","progress":0.999,"total":1083,"current":1083}
+{"_e":"metro:bundling:done","_t":1785735221760,"id":"1","total":1083,"ms":3380.7683}
+{"_e":"metro:client_log","_t":1785735231522,"level":"warn","data":["The global process.env.EXPO_OS is not defined. This should be inlined by babel-preset-expo during transformation."]}
+{"_e":"metro:bundling:started","_t":1785736031709,"id":"4","platform":"android","environment":null,"entry":"index.js"}
+{"_e":"metro:bundling:progress","_t":1785736031870,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785736032185,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785736032388,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785736035255,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1785736035899,"id":"4","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1785736036987,"id":"4","total":1,"ms":5118.6021}
+{"_e":"metro:client_log","_t":1785736046007,"level":"warn","data":["The global process.env.EXPO_OS is not defined. This should be inlined by babel-preset-expo during transformation."]}
+{"_e":"metro:bundling:failed","_t":1785737840887,"id":null,"message":"Unable to resolve \"../../utils/constants\" from \"src\\presentation\\components\\EditarPedidoCard.tsx\"\n  2 | import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';\n  3 | import { Ionicons } from '@expo/vector-icons';\n> 4 | import { COLORS } from '../../utils/constants';\n    |                         ^\n  5 |\n  6 | interface EditarPedidoCardProps {\n  7 |   pedidoId: any;","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\presentation\\components\\EditarPedidoCard.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../utils/constants\"\u001b[39m\n\n\u001b[90m \u001b[39msrc\\presentation\\screens\\EditarPedidoScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../components/EditarPedidoCard\"\u001b[39m\n\n\u001b[90m \u001b[39msrc\\app\\navigation\\AppNavigator.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../presentation/screens/EditarPedidoScreen\"\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/app/navigation/AppNavigator\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.js\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index\"\u001b[39m\n","filename":null,"targetModuleName":"../../utils/constants","originModulePath":"src\\presentation\\components\\EditarPedidoCard.tsx"}
+{"_e":"metro:bundling:failed","_t":1785737841148,"id":null,"message":"Unable to resolve \"../../utils/constants\" from \"src\\presentation\\components\\EditarPedidoCard.tsx\"\n  2 | import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';\n  3 | import { Ionicons } from '@expo/vector-icons';\n> 4 | import { COLORS } from '../../utils/constants';\n    |                         ^\n  5 |\n  6 | interface EditarPedidoCardProps {\n  7 |   pedidoId: any;","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39msrc\\presentation\\components\\EditarPedidoCard.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../utils/constants\"\u001b[39m\n\n\u001b[90m \u001b[39msrc\\presentation\\screens\\EditarPedidoScreen.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../components/EditarPedidoCard\"\u001b[39m\n\n\u001b[90m \u001b[39msrc\\app\\navigation\\AppNavigator.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"../../presentation/screens/EditarPedidoScreen\"\u001b[39m\n\n\u001b[90m \u001b[39mApp.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./src/app/navigation/AppNavigator\"\u001b[39m\n\n\u001b[90m \u001b[39mindex.js\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./App\"\u001b[39m\n\n\u001b[90m \u001b[39m\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"./index\"\u001b[39m\n","filename":null,"targetModuleName":"../../utils/constants","originModulePath":"src\\presentation\\components\\EditarPedidoCard.tsx"}
