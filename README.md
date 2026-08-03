@@ -19,7 +19,8 @@
 ---
 
 ##  2. Integrantes del Equipo
-* **Desarrolladores / Colaboradores:** Yoli Jhunior *(Yolijhunior)*
+* **Desarrolladores / Colaboradores:** Yoli Jhunior *
+* zurita rimaicuna abner
 
 ---
 
