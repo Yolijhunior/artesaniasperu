@@ -1,4 +1,12 @@
 {
-  "name": "PedidosApp",
-  "displayName": "PedidosApp"
+  "expo": {
+    "name": "PedidosApp",
+    "slug": "PedidosApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.yoliyma.pedidosapp"
+    }
+  }
 }
