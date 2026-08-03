@@ -1,97 +1,101 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📱 PedidosApp - Sistema de Gestión de Pedidos y Catálogo
 
-# Getting Started
+<div align="center">
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+[![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-000000?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-07405e?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
 
-## Step 1: Start Metro
+</div>
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+---
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## 1. Descripción del Proyecto
+**PedidosApp** es una aplicación móvil desarrollada con tecnologías multiplataforma para el control y la gestión integral de pedidos comerciales. Permite la persistencia de datos de forma local, el consumo asíncrono de APIs REST para catálogos de productos y una interfaz intuitiva con pantallas dedicadas para el ciclo de vida completo de cada orden.
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
+##  2. Integrantes del Equipo
+* **Desarrolladores / Colaboradores:** Yoli Jhunior *(Yolijhunior)*
+
+---
+
+##  3. Requisitos del Entorno
+* ![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=nodedotjs&logoColor=white) **Node.js** (Versión LTS recomendada 18.x o superior).
+* ![npm](https://img.shields.io/badge/-npm-CB3837?logo=npm&logoColor=white) **npm** o **Yarn** para la gestión de dependencias.
+* **Expo CLI** (Herramienta CLI para la ejecución del entorno).
+* **Expo Go** instalado en un dispositivo físico (Android / iOS) o un emulador configurado.
+
+---
+
+##  4. Pasos de Instalación
+1. Clona el repositorio oficial: `git clone https://github.com/Yolijhunior/artesaniasperu.git`
+2. Entra al directorio del proyecto: `cd PedidosApp`
+3. Instala los paquetes y dependencias necesarias: `npm install`
+
+---
+
+## 5. Pasos de Ejecución
+1. Inicia el servidor de desarrollo local mediante Expo: `npx expo start`
+2. Escanea el código QR generado en la terminal utilizando la aplicación **Expo Go** en tu dispositivo móvil.
+
+---
+
+##  6. Estructura del Proyecto
+La arquitectura se organiza bajo una separación clara de responsabilidades:
+```text
+PedidosApp/
+├── assets/                  # Recursos gráficos e imágenes estáticas
+├── src/
+│   ├── app/
+│   │   └── navigation/      # Configuración de rutas y navegadores (AppNavigator.tsx)
+│   ├── domain/
+│   │   ├── models/          # Interfaces y modelos de datos (Pedido.ts)
+│   │   └── repositories/    # Lógica de repositorios locales
+│   ├── infrastructure/
+│   │   ├── database/        # Conexión y esquemas de SQLite (sqlite.ts)
+│   │   └── services/        # Conexión con servicios HTTP / API REST (apiService.ts)
+│   ├── utils/               # Funciones de validación de datos y manejo de errores
+│   └── constants/           # Constantes globales de la aplicación y endpoints
+├── App.tsx                  # Componente raíz de la aplicación
+├── app.json                 # Configuración general de Expo
+└── package.json             # Dependencias del proyecto
 ```
 
-## Step 2: Build and run your app
+## 7. Funcionalidades Implementadas
+Autenticación: Pantalla de acceso inicial al sistema.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+CRUD Local (SQLite):
 
-### Android
+Crear: Registro con validaciones estrictas de campos y cantidades.
 
-```sh
-# Using npm
-npm run android
+Leer: Listado de pedidos filtrados por estado y barra de búsqueda predictiva.
 
-# OR using Yarn
-yarn android
-```
+Actualizar: Interfaz dedicada (EditarPedidoScreen) con selectores de estado y control numérico.
 
-### iOS
+Eliminar: Borrado seguro de registros desde vistas de detalle o listado.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+Consumo de API REST: Módulo conectado a catálogos externos para la selección automatizada de productos y asignación estricta de precios oficiales.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+Navegación Modular: Estructura basada en React Navigation.
 
-```sh
-bundle install
-```
+ 8. Cómo Probar el CRUD con SQLite
+Inicia sesión en la aplicación.
 
-Then, and every time you update your native dependencies, run:
+Presiona el botón flotante ＋ para añadir un nuevo pedido.
 
-```sh
-bundle exec pod install
-```
+Completa los campos obligatorios (Cliente, selección de producto proveniente de la API, cantidad y precio autogestionado) y guarda. Los datos se almacenarán en la base de datos local SQLite.
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+Haz clic en "Ver" para comprobar el flujo en la pantalla de Detalle, o en "Editar" para modificar sus atributos de forma persistente.
 
-```sh
-# Using npm
-npm run ios
+Usa el botón de Eliminar para remover registros del sistema.
 
-# OR using Yarn
-yarn ios
-```
+ 9. Cómo Probar el Consumo REST
+Accede a la sección de Catálogo API desde el menú principal.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+La aplicación ejecutará una petición HTTP asíncrona hacia el servicio externo configurado en apiService.ts.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Comprueba la lista de productos devuelta en tiempo real y verifica su vinculación directa con los módulos de creación y edición de pedidos.
