@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../utils/constants';
 import { validarCorreo, validarNombre, validarPassword } from '../utils/validations';
-import { initDatabase, loginUsuarioDB, registrarUsuarioDB } from '../../infrastructure/database/sqlite';
+import { registrarUsuarioFirebase, loginUsuarioFirebase } from '../../infrastructure/services/authService';
 
 export const LoginScreen = ({ navigation }: any) => {
   const [isRegistering, setIsRegistering] = useState(false);
@@ -13,10 +13,6 @@ export const LoginScreen = ({ navigation }: any) => {
   const [mostrarPassword, setMostrarPassword] = useState(false);
   const [errorForm, setErrorForm] = useState('');
 
-  useEffect(() => {
-    initDatabase();
-  }, []);
-
   const cambiarModo = () => {
     setIsRegistering(!isRegistering);
     setErrorForm('');
@@ -25,7 +21,7 @@ export const LoginScreen = ({ navigation }: any) => {
     setPassword('');
   };
 
-  const handleAction = () => {
+  const handleAction = async () => {
     setErrorForm('');
 
     if (!validarCorreo(email)) {
@@ -46,7 +42,7 @@ export const LoginScreen = ({ navigation }: any) => {
         return;
       }
 
-      const resultadoRegistro = registrarUsuarioDB(nombre, email, password);
+      const resultadoRegistro = await registrarUsuarioFirebase(nombre, email, password);
       if (!resultadoRegistro.success) {
         setErrorForm(resultadoRegistro.error || 'No se pudo registrar.');
         return;
@@ -58,14 +54,15 @@ export const LoginScreen = ({ navigation }: any) => {
         [{ text: 'OK', onPress: () => cambiarModo() }]
       );
     } else {
-      // Validar usuario real en SQLite
-      const resultadoLogin = loginUsuarioDB(email, password);
+      // Validar usuario real en Firebase Auth
+      const resultadoLogin = await loginUsuarioFirebase(email, password);
       if (!resultadoLogin.success) {
         setErrorForm(resultadoLogin.error || 'Credenciales incorrectas.');
         return;
       }
 
-      navigation.replace('ListadoPedidos', { userName: resultadoLogin.nombre });
+      const userName = resultadoLogin.user?.displayName || 'Usuario';
+      navigation.replace('ListadoPedidos', { userName });
     }
   };
 

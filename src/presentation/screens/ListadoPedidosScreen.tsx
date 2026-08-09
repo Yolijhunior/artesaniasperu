@@ -4,7 +4,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { usePedidos } from '../hooks/usePedidos';
 import { COLORS } from '../utils/constants';
 import { Ionicons } from '@expo/vector-icons';
-import { PedidoCard } from '../components/PedidoCard'; // <-- Componente importado
+import { PedidoCard } from '../components/PedidoCard';
+import { auth } from '../../infrastructure/firebase/firebaseConfig';
 
 export const ListadoPedidosScreen = ({ route, navigation }: any) => {
   const [busqueda, setBusqueda] = useState('');
@@ -15,6 +16,8 @@ export const ListadoPedidosScreen = ({ route, navigation }: any) => {
   const slideAnim = useRef(new Animated.Value(-280)).current;
 
   const userName = route?.params?.userName || 'Juan';
+  const userEmail = auth.currentUser?.email || 'artesano@artesanias.com';
+
   const { pedidos, cargando, error, eliminarPedido, recargarPedidos } = usePedidos() as any;
 
   useFocusEffect(
@@ -37,6 +40,8 @@ export const ListadoPedidosScreen = ({ route, navigation }: any) => {
   };
 
   const listaPedidosSegura = Array.isArray(pedidos) ? pedidos : [];
+  const totalVentasRealizadas = listaPedidosSegura.length;
+
   const pedidosFiltrados = listaPedidosSegura.filter(item => {
     const textoBusqueda = (busqueda || '').toLowerCase().trim();
     const cliente = (item.clienteNombre || '').toLowerCase();
@@ -176,25 +181,54 @@ export const ListadoPedidosScreen = ({ route, navigation }: any) => {
         <View style={styles.modalOverlay}>
           <TouchableOpacity style={styles.backdrop} activeOpacity={1} onPress={cerrarMenu} />
           <Animated.View style={[styles.menuContainer, { transform: [{ translateX: slideAnim }] }]}>
+            
             <View style={styles.menuHeader}>
               <Text style={styles.menuTitleText}>Menú de Opciones</Text>
               <TouchableOpacity onPress={cerrarMenu}>
                 <Ionicons name="close" size={22} color="#333" />
               </TouchableOpacity>
             </View>
+
+            {/* SECCIÓN DE PERFIL DE USUARIO INTERACTIVA */}
+            <TouchableOpacity 
+              style={styles.profileBox} 
+              onPress={() => { 
+                cerrarMenu(); 
+                navigation.navigate('PerfilScreen', { userName, userEmail, totalVentas: totalVentasRealizadas }); 
+              }}
+            >
+              <View style={styles.profileAvatarContainer}>
+                <Ionicons name="person" size={32} color={COLORS.primary} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={styles.profileName} numberOfLines={1}>{userName}</Text>
+                <Text style={styles.profileEmail} numberOfLines={1}>{userEmail}</Text>
+                <View style={styles.badgeVentas}>
+                  <Text style={styles.badgeVentasText}>Ventas Registradas: {totalVentasRealizadas}</Text>
+                </View>
+              </View>
+              <Ionicons name="chevron-forward" size={20} color="#757575" />
+            </TouchableOpacity>
+
+            <View style={styles.menuDivider} />
+
             <TouchableOpacity style={styles.menuItem} onPress={() => { cerrarMenu(); navigation.navigate('CatalogoApi'); }}>
               <Ionicons name="storefront-outline" size={20} color={COLORS.primary} />
               <Text style={styles.menuItemText}>Catálogo de Productos (API)</Text>
             </TouchableOpacity>
+
             <TouchableOpacity style={styles.menuItem} onPress={() => { cerrarMenu(); navigation.navigate('FormPedido'); }}>
               <Ionicons name="add-circle-outline" size={20} color={COLORS.primary} />
               <Text style={styles.menuItemText}>Registrar Nuevo Pedido</Text>
             </TouchableOpacity>
+
             <View style={styles.menuDivider} />
+
             <TouchableOpacity style={styles.menuItemLogout} onPress={confirmarCierreSesion}>
               <Ionicons name="log-out-outline" size={20} color={COLORS.error} />
               <Text style={styles.menuItemLogoutText}>Cerrar Sesión</Text>
             </TouchableOpacity>
+
           </Animated.View>
         </View>
       </Modal>
@@ -225,12 +259,18 @@ const styles = StyleSheet.create({
   fabText: { color: '#fff', fontSize: 28, fontWeight: 'bold' },
   modalOverlay: { flex: 1, flexDirection: 'row', backgroundColor: 'rgba(0,0,0,0.5)' },
   backdrop: { flex: 1 },
-  menuContainer: { position: 'absolute', left: 0, top: 0, bottom: 0, width: 280, backgroundColor: '#fff', paddingTop: 50, paddingHorizontal: 15, elevation: 10, shadowColor: '#000', shadowOffset: { width: 3, height: 0 }, shadowOpacity: 0.3, shadowRadius: 5 },
-  menuHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: '#eee', marginBottom: 15 },
+  menuContainer: { position: 'absolute', left: 0, top: 0, bottom: 0, width: 300, backgroundColor: '#fff', paddingTop: 40, paddingHorizontal: 15, elevation: 10, shadowColor: '#000', shadowOffset: { width: 3, height: 0 }, shadowOpacity: 0.3, shadowRadius: 5 },
+  menuHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 10, borderBottomWidth: 1, borderBottomColor: '#eee', marginBottom: 10 },
   menuTitleText: { fontSize: 16, fontWeight: 'bold', color: '#333' },
+  profileBox: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFF5F5', padding: 10, borderRadius: 8, gap: 10, marginVertical: 5, borderWidth: 1, borderColor: '#FFEAEA' },
+  profileAvatarContainer: { width: 48, height: 48, borderRadius: 24, backgroundColor: '#FFCDD2', justifyContent: 'center', alignItems: 'center' },
+  profileName: { fontSize: 14, fontWeight: 'bold', color: '#212121' },
+  profileEmail: { fontSize: 11, color: '#757575', marginBottom: 4 },
+  badgeVentas: { backgroundColor: COLORS.primary, paddingHorizontal: 6, paddingVertical: 2, borderRadius: 4, alignSelf: 'flex-start' },
+  badgeVentasText: { fontSize: 10, color: '#fff', fontWeight: 'bold' },
   menuItem: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, gap: 12 },
   menuItemText: { fontSize: 14, fontWeight: '500', color: '#333' },
-  menuDivider: { height: 1, backgroundColor: '#eee', marginVertical: 10 },
+  menuDivider: { height: 1, backgroundColor: '#eee', marginVertical: 8 },
   menuItemLogout: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, gap: 12 },
   menuItemLogoutText: { fontSize: 14, fontWeight: 'bold', color: COLORS.error },
 });

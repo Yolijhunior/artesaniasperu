@@ -21,11 +21,9 @@ export const EditarPedidoScreen = ({ route, navigation }: any) => {
   const [clienteNombre, setClienteNombre] = useState(pedido?.clienteNombre || '');
   const [erroresForm, setErroresForm] = useState<{ [key: string]: string }>({});
   
-  // ✅ Limpiamos correctamente los nombres iniciales para evitar duplicar prefijos como "1x 1x"
   const productosIniciales = Array.isArray(pedido?.productos) && pedido.productos.length > 0
     ? pedido.productos.map((p: any) => {
         let nombreLimpio = p.nombre || '';
-        // Si el nombre ya trae un formato tipo "1x Torito", le quitamos el "Nx " inicial para limpiarlo
         nombreLimpio = nombreLimpio.replace(/^\d+x\s*/, '');
         return { ...p, nombre: nombreLimpio, cantidad: p.cantidad || 1 };
       })

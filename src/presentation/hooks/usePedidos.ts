@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Pedido } from '../../domain/models/Pedido';
 import { 
-  getPedidosDB, 
-  insertPedidoDB, 
-  deletePedidoDB,
-  updatePedidoDB 
-} from '../../infrastructure/database/sqlite';
+  getPedidosFirestore, 
+  insertPedidoFirestore, 
+  updatePedidoFirestore, 
+  deletePedidoFirestore 
+} from '../../infrastructure/services/pedidoService';
+import { auth } from '../../infrastructure/firebase/firebaseConfig';
 
 export const usePedidos = () => {
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
@@ -16,7 +17,14 @@ export const usePedidos = () => {
     try {
       setCargando(true);
       setError(null);
-      const items: any = getPedidosDB();
+      
+      const uid = auth.currentUser?.uid;
+      if (!uid) {
+        setPedidos([]);
+        return;
+      }
+
+      const items = await getPedidosFirestore(uid);
       setPedidos(items);
     } catch (err: any) {
       setError(err.message || 'Error al cargar los pedidos.');
@@ -31,7 +39,10 @@ export const usePedidos = () => {
 
   const registrarNuevoPedido = async (pedido: any) => {
     try {
-      insertPedidoDB(pedido);
+      const uid = auth.currentUser?.uid;
+      if (!uid) throw new Error("No hay un usuario autenticado.");
+      
+      await insertPedidoFirestore(pedido, uid);
       await cargarDatos();
     } catch (err: any) {
       setError('Error al registrar el pedido.');
@@ -39,9 +50,9 @@ export const usePedidos = () => {
     }
   };
 
-  const actualizarPedido = async (id: number, pedido: any) => {
+  const actualizarPedido = async (id: string, pedido: any) => {
     try {
-      updatePedidoDB(id, pedido);
+      await updatePedidoFirestore(id, pedido);
       await cargarDatos();
     } catch (err: any) {
       setError('Error al actualizar el pedido.');
@@ -49,9 +60,9 @@ export const usePedidos = () => {
     }
   };
 
-  const eliminarPedido = async (id: number) => {
+  const eliminarPedido = async (id: string) => {
     try {
-      deletePedidoDB(id);
+      await deletePedidoFirestore(id);
       await cargarDatos();
     } catch (err: any) {
       setError('Error al eliminar el pedido.');

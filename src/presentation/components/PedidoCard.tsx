@@ -20,6 +20,21 @@ const getBadgeStyle = (estado: string) => {
   }
 };
 
+// Función para formatear fecha y hora legible para Perú
+const formatearFechaHora = (fechaStr: string) => {
+  if (!fechaStr) return '';
+  const fecha = new Date(fechaStr);
+  if (isNaN(fecha.getTime())) return fechaStr; 
+  return fecha.toLocaleString('es-PE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true // Cambia a false si prefieres formato de 24 horas
+  });
+};
+
 export const PedidoCard = ({ item, onVer, onEditar, onEliminar }: PedidoCardProps) => {
   const badgeInfo = getBadgeStyle(item.estado);
   const estadoTextoLimpio = item.estado === 'EN_PROCESO' ? 'EN PROCESO' : item.estado;
@@ -35,7 +50,7 @@ export const PedidoCard = ({ item, onVer, onEditar, onEliminar }: PedidoCardProp
       
       <Text style={styles.prodText}>Producto: {item.producto}</Text>
       <Text style={styles.priceText}>Precio Total: S/ {Number(item.precio || 0).toFixed(2)}</Text>
-      <Text style={styles.fecha}>Fecha: {item.fechaRegistro}</Text>
+      <Text style={styles.fecha}>Fecha y Hora: {formatearFechaHora(item.fechaRegistro)}</Text>
       
       <View style={styles.actions}>
         <TouchableOpacity style={styles.btnDetail} onPress={() => onVer(item)}>

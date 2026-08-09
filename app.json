@@ -7,6 +7,14 @@
     "userInterfaceStyle": "light",
     "android": {
       "package": "com.yoliyma.pedidosapp"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3839d634-015a-4539-8704-9fe13000b345"
+      }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

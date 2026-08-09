@@ -4,13 +4,14 @@ import { usePedidos } from '../hooks/usePedidos';
 import { validarNombre } from '../utils/validations';
 import { ESTADOS_PEDIDO } from '../utils/constants';
 import { getCatalogoProductos, ProductoApi } from '../../infrastructure/services/apiService';
-import { FormPedidoContent } from '../components/FormPedidoCard'; // <-- Ruta correcta hacia components
+import { FormPedidoContent } from '../components/FormPedidoCard';
+
 interface ItemSeleccionado {
   producto: ProductoApi;
   cantidad: number;
 }
 
-export const FormPedidoScreen = ({ navigation }: any) => {
+export const FormPedidoScreen = ({ route, navigation }: any) => {
   const { registrarNuevoPedido, recargarPedidos } = usePedidos();
 
   const [clienteNombre, setClienteNombre] = useState('');
@@ -28,17 +29,33 @@ export const FormPedidoScreen = ({ navigation }: any) => {
     { label: ESTADOS_PEDIDO.CANCELADO, color: '#F44336' }, 
   ];
 
+  // Cargar productos del API y gestionar el producto que viene por navegación desde el Catálogo
   useEffect(() => {
-    const cargarProductosApi = async () => {
+    const cargarDatos = async () => {
       try {
         const data = await getCatalogoProductos();
         setListaProductos(data);
+
+        // Si el usuario presionó un producto directamente en el Catálogo Externo
+        const prodParam = route.params?.productoSeleccionado;
+        if (prodParam) {
+          setItemsSeleccionados(prev => {
+            const existe = prev.find(item => item.producto.id === prodParam.id);
+            if (existe) {
+              return prev.map(item => 
+                item.producto.id === prodParam.id ? { ...item, cantidad: item.cantidad + 1 } : item
+              );
+            } else {
+              return [...prev, { producto: prodParam, cantidad: 1 }];
+            }
+          });
+        }
       } catch (error) {
         console.error('No se pudo cargar el catálogo para el formulario', error);
       }
     };
-    cargarProductosApi();
-  }, []);
+    cargarDatos();
+  }, [route.params?.productoSeleccionado]);
 
   const handleSeleccionarProducto = (prod: ProductoApi) => {
     setItemsSeleccionados(prev => {
@@ -91,7 +108,7 @@ export const FormPedidoScreen = ({ navigation }: any) => {
       cantidad: cantidadTotal,
       precio: precioTotal,
       estado: estadoSeleccionado,
-      fechaRegistro: new Date().toLocaleDateString(),
+      fechaRegistro: new Date().toISOString(), // Fecha limpia para que el formateador la lea correctamente
     };
 
     try {

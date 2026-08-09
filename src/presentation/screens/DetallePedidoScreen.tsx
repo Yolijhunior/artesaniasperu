@@ -53,6 +53,20 @@ export const DetallePedidoScreen = ({ route, navigation }: any) => {
   const badgeInfo = getBadgeStyle(pedido.estado);
   const estadoLimpio = pedido.estado === 'EN_PROCESO' ? 'EN PROCESO' : pedido.estado;
 
+  // Formatear la fecha de registro correctamente
+  const formatearFecha = (fechaStr: string) => {
+    if (!fechaStr) return 'No registrada';
+    try {
+      const fecha = new Date(fechaStr);
+      if (isNaN(fecha.getTime())) return fechaStr;
+      return fecha.toLocaleDateString() + ', ' + fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } catch (e) {
+      return fechaStr;
+    }
+  };
+
+  const precioTotalFinal = Number(pedido.precio || 0);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -77,25 +91,14 @@ export const DetallePedidoScreen = ({ route, navigation }: any) => {
           <Text style={styles.label}>Cliente</Text>
           <Text style={styles.value}>{pedido.clienteNombre || 'Sin cliente'}</Text>
 
-          <Text style={styles.label}>Producto</Text>
+          <Text style={styles.label}>Productos Solicitados</Text>
           <Text style={styles.value}>{pedido.producto || 'Sin producto'}</Text>
 
-          <View style={styles.row}>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.label}>Cantidad</Text>
-              <Text style={styles.value}>{pedido.cantidad || 0}</Text>
-            </View>
-            <View style={{ flex: 1 }}>
-              <Text style={styles.label}>Precio Unitario</Text>
-              <Text style={styles.value}>S/ {Number(pedido.precio || 0).toFixed(2)}</Text>
-            </View>
-          </View>
-
           <Text style={styles.label}>Precio Total</Text>
-          <Text style={styles.totalValue}>S/ {((pedido.precio || 0) * (pedido.cantidad || 0)).toFixed(2)}</Text>
+          <Text style={styles.totalValue}>S/ {precioTotalFinal.toFixed(2)}</Text>
 
           <Text style={styles.label}>Fecha de Registro</Text>
-          <Text style={styles.value}>{pedido.fechaRegistro || 'No registrada'}</Text>
+          <Text style={styles.value}>{formatearFecha(pedido.fechaRegistro)}</Text>
         </View>
 
         <View style={styles.actionButtonsRow}>
@@ -129,13 +132,12 @@ const styles = StyleSheet.create({
   content: { padding: 15 },
   card: { backgroundColor: '#fff', borderRadius: 12, padding: 20, elevation: 2, marginBottom: 20 },
   rowBetween: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  row: { flexDirection: 'row', gap: 10, marginTop: 10 },
   labelCode: { fontSize: 12, color: '#888', fontWeight: 'bold' },
   badge: { fontSize: 11, fontWeight: 'bold', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 6, overflow: 'hidden' },
   divider: { height: 1, backgroundColor: '#eee', marginVertical: 15 },
-  label: { fontSize: 12, fontWeight: '600', color: '#666', marginTop: 10 },
+  label: { fontSize: 12, fontWeight: '600', color: '#666', marginTop: 12 },
   value: { fontSize: 15, color: '#333', fontWeight: '500', marginTop: 2 },
-  totalValue: { fontSize: 18, fontWeight: 'bold', color: COLORS.primary, marginTop: 2 },
+  totalValue: { fontSize: 20, fontWeight: 'bold', color: COLORS.primary, marginTop: 4 },
   actionButtonsRow: { flexDirection: 'row', gap: 10 },
   editButton: { flex: 1, backgroundColor: '#475569', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 14, borderRadius: 10, gap: 6, elevation: 2 },
   deleteButton: { flex: 1, backgroundColor: '#fee2e2', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 14, borderRadius: 10, gap: 6, elevation: 1, borderWidth: 1, borderColor: '#fca5a5' },

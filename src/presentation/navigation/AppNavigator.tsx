@@ -9,6 +9,7 @@ import { CatalogoApiScreen } from '../../presentation/screens/CatalogoApiScreen'
 import { PerfilScreen } from '../../presentation/screens/PerfilScreen';
 import { DetallePedidoScreen } from '../../presentation/screens/DetallePedidoScreen';
 import { EditarPedidoScreen } from '../../presentation/screens/EditarPedidoScreen';
+
 const Stack = createNativeStackNavigator();
 
 export const AppNavigator = () => {
@@ -36,12 +37,20 @@ export const AppNavigator = () => {
           options={{ title: 'Catálogo Externo' }} 
         />
         <Stack.Screen 
-         name="Perfil" 
-         component={PerfilScreen} 
-         options={{ title: 'Perfil / Configuración' }} 
+          name="PerfilScreen" 
+          component={PerfilScreen} 
+          options={{ title: 'Perfil / Configuración' }} 
         />
-        <Stack.Screen name="DetallePedido" component={DetallePedidoScreen} options={{ headerShown: false }} />
-<Stack.Screen name="EditarPedido" component={EditarPedidoScreen} options={{ headerShown: false }} />
+        <Stack.Screen 
+          name="DetallePedido" 
+          component={DetallePedidoScreen} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="EditarPedido" 
+          component={EditarPedidoScreen} 
+          options={{ headerShown: false }} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
