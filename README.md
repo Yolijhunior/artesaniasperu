@@ -1,10 +1,10 @@
-# 📦 PedidosApp
+# PedidosApp
 
 Aplicación móvil desarrollada para la **gestión integral de pedidos**, consumo de **catálogos mediante API REST** y **autenticación de usuarios**.
 
 ---
 
-## 📋 Tabla de contenidos
+## Tabla de contenidos
 
 - [Descripción del proyecto](#-descripción-del-proyecto)
 - [Tecnologías y herramientas usadas](#️-tecnologías-y-herramientas-usadas)
@@ -22,7 +22,7 @@ Aplicación móvil desarrollada para la **gestión integral de pedidos**, consum
 
 ---
 
-## 📖 Descripción del proyecto
+##Descripción del proyecto
 
 **PedidosApp** es una aplicación móvil multiplataforma (Android / iOS) construida con **React Native** y **Expo**, pensada para digitalizar el proceso de toma y gestión de pedidos de productos artesanales.
 
@@ -36,7 +36,7 @@ Entre sus principales funcionalidades se encuentran:
 
 ---
 
-## 🛠️ Tecnologías y Herramientas Usadas
+##Tecnologías y Herramientas Usadas
 
 <p align="left">
   <img src="https://img.shields.io/badge/React%20Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native"/>
@@ -49,7 +49,7 @@ Entre sus principales funcionalidades se encuentran:
 
 ---
 
-## 📂 Estructura del proyecto
+##Estructura del proyecto
 
 ```
 ARTESANIASPERU/
@@ -95,7 +95,7 @@ ARTESANIASPERU/
 
 ---
 
-## ✅ Requisitos
+##Requisitos
 
 Asegúrate de tener instalado lo siguiente en tu entorno de desarrollo:
 
@@ -107,7 +107,7 @@ Asegúrate de tener instalado lo siguiente en tu entorno de desarrollo:
 
 ---
 
-## 🚀 Instalación
+##Instalación
 
 ### 1. Clonar el repositorio
 
@@ -124,7 +124,7 @@ npm install
 
 ---
 
-## ⚙️ Configuración de Firebase
+##Configuración de Firebase
 
 La aplicación utiliza **Firebase** para la autenticación de usuarios y el almacenamiento de información.
 
@@ -138,11 +138,11 @@ Asegúrate de tener habilitado en la consola de Firebase:
   - Email/Password
 - **Firestore Database** o **Realtime Database**
 
-> ⚠️ No compartas públicamente tus credenciales o claves privadas de Firebase.
+> No compartas públicamente tus credenciales o claves privadas de Firebase.
 
 ---
 
-## ▶️ Cómo ejecutar el proyecto
+##Cómo ejecutar el proyecto
 
 Para iniciar el servidor de desarrollo con Metro Bundler:
 
@@ -150,21 +150,21 @@ Para iniciar el servidor de desarrollo con Metro Bundler:
 npx expo start
 ```
 
-### 📱 Dispositivo físico
+###Dispositivo físico
 
 Escanea el código QR que aparece en la terminal utilizando **Expo Go** en Android o iOS.
 
-### 🤖 Emulador Android
+###Emulador Android
 
 Presiona la tecla `a` en la terminal para abrir el emulador de Android.
 
-### 🍎 Simulador iOS
+###Simulador iOS
 
 Presiona la tecla `i` en la terminal para abrir el simulador de iOS.
 
 ---
 
-## 👤 Cómo probar el Login
+##Cómo probar el Login
 
 1. Abre la aplicación en tu dispositivo o emulador.
 2. Si no cuentas con una cuenta, selecciona la opción **Registrarse**.
@@ -175,21 +175,21 @@ Presiona la tecla `i` en la terminal para abrir el simulador de iOS.
 
 ---
 
-## 📝 Cómo probar el CRUD de Pedidos
+##Cómo probar el CRUD de Pedidos
 
 Una vez autenticado, podrás gestionar los pedidos mediante las siguientes operaciones:
 
-### ➕ Crear — Create
+###Crear — Create
 
 Ve al formulario de pedidos para registrar un nuevo pedido seleccionando productos del catálogo.
 
-### 📖 Leer — Read
+###Leer — Read
 
 Visualiza la lista completa de pedidos registrados desde:
 
 `ListadoPedidosScreen`
 
-### ✏️ Actualizar — Update
+###Actualizar — Update
 
 1. Selecciona un pedido.
 2. Accede al detalle.
@@ -197,7 +197,7 @@ Visualiza la lista completa de pedidos registrados desde:
 4. Modifica los datos.
 5. Guarda los cambios.
 
-### 🗑️ Eliminar — Delete
+##Eliminar — Delete
 
 1. Accede al detalle del pedido.
 2. Selecciona **Eliminar**.
@@ -206,7 +206,7 @@ Visualiza la lista completa de pedidos registrados desde:
 
 ---
 
-## 💾 Cómo probar SQLite
+##Cómo probar SQLite
 
 La aplicación implementa almacenamiento local mediante **expo-sqlite** para mejorar la persistencia y caché de datos offline en el dispositivo.
 
@@ -214,7 +214,7 @@ Los datos locales son gestionados automáticamente por la aplicación durante la
 
 ---
 
-## 🌐 Cómo probar el consumo de API REST
+##Cómo probar el consumo de API REST
 
 Dirígete a la pantalla:
 
@@ -224,13 +224,13 @@ La aplicación realizará una petición HTTP mediante `fetch` a la API REST conf
 
 Podrás visualizar en tiempo real:
 
-- 🖼️ Imágenes
-- 🏷️ Nombres de productos
-- 💲 Precios unitarios
+-Imágenes
+-Nombres de productos
+-Precios unitarios
 
 ---
 
-## ☁️ Cómo probar Firestore o Realtime Database
+##Cómo probar Firestore o Realtime Database
 
 Para comprobar la sincronización con Firebase:
 
@@ -243,9 +243,9 @@ Para comprobar la sincronización con Firebase:
 
 ---
 
-## 📦 Cómo generar APK / AAB
+##Cómo generar APK / AAB
 
-### 🤖 Generar APK para Android
+###Generar APK para Android
 
 Para generar un archivo `.apk` instalable directamente en Android utilizando EAS:
 
@@ -258,7 +258,7 @@ Al finalizar la compilación, EAS proporcionará un enlace de descarga.
 ---
 
 <p align="center">
-  📱 <strong>PedidosApp</strong>
+  <strong>PedidosApp</strong>
 </p>
 
 <p align="center">
