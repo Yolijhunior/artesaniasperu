@@ -1,6 +1,38 @@
-# PedidosApp 
+# 📦 PedidosApp
 
 Aplicación móvil desarrollada para la **gestión integral de pedidos**, consumo de **catálogos mediante API REST** y **autenticación de usuarios**.
+
+---
+
+## 📋 Tabla de contenidos
+
+- [Descripción del proyecto](#-descripción-del-proyecto)
+- [Tecnologías y herramientas usadas](#️-tecnologías-y-herramientas-usadas)
+- [Estructura del proyecto](#-estructura-del-proyecto)
+- [Requisitos](#-requisitos)
+- [Instalación](#-instalación)
+- [Configuración de Firebase](#️-configuración-de-firebase)
+- [Cómo ejecutar el proyecto](#-cómo-ejecutar-el-proyecto)
+- [Cómo probar el Login](#-cómo-probar-el-login)
+- [Cómo probar el CRUD de Pedidos](#-cómo-probar-el-crud-de-pedidos)
+- [Cómo probar SQLite](#-cómo-probar-sqlite)
+- [Cómo probar el consumo de API REST](#-cómo-probar-el-consumo-de-api-rest)
+- [Cómo probar Firestore o Realtime Database](#️-cómo-probar-firestore-o-realtime-database)
+- [Cómo generar APK / AAB](#-cómo-generar-apk--aab)
+
+---
+
+## 📖 Descripción del proyecto
+
+**PedidosApp** es una aplicación móvil multiplataforma (Android / iOS) construida con **React Native** y **Expo**, pensada para digitalizar el proceso de toma y gestión de pedidos de productos artesanales.
+
+Entre sus principales funcionalidades se encuentran:
+
+- Registro e inicio de sesión de usuarios mediante **Firebase Authentication**.
+- Gestión completa (CRUD) de pedidos.
+- Consumo de un catálogo de productos externo a través de una **API REST**.
+- Persistencia y caché local de datos mediante **SQLite**, permitiendo trabajar sin conexión.
+- Sincronización de la información en la nube usando **Firestore / Realtime Database**.
 
 ---
 
@@ -17,19 +49,65 @@ Aplicación móvil desarrollada para la **gestión integral de pedidos**, consum
 
 ---
 
-##  Requisitos
+## 📂 Estructura del proyecto
+
+```
+ARTESANIASPERU/
+├── __tests__/                        # Pruebas unitarias
+├── .bundle
+├── .expo
+├── assets/
+│   └── logo.png
+├── src/
+│   ├── domain/
+│   │   ├── models/                   # Entidades y modelos de datos
+│   │   └── repositories/             # Contratos/repositorios de acceso a datos
+│   ├── infrastructure/
+│   │   ├── database/                 # Configuración de SQLite
+│   │   ├── firebase/                 # Configuración de Firebase (firebaseConfig.ts)
+│   │   └── services/                 # Servicios y consumo de API REST
+│   └── presentation/
+│       ├── components/               # Componentes reutilizables de UI
+│       ├── context/                  # Contextos de React (estado global)
+│       ├── hooks/                    # Custom hooks
+│       ├── navigation/               # Configuración de navegación
+│       ├── screens/                  # Pantallas (ListadoPedidosScreen, CatalogoApiScreen, etc.)
+│       └── utils/                    # Funciones utilitarias
+├── .eslintrc.js
+├── .gitignore
+├── .prettierrc.js
+├── .watchmanconfig
+├── app.json                          # Configuración de Expo
+├── App.tsx
+├── babel.config.js
+├── eas.json                          # Configuración de EAS Build
+├── Gemfile
+├── index.js
+├── jest.config.js
+├── metro.config.js
+├── package-lock.json
+├── package.json
+├── README.md
+└── tsconfig.json
+```
+
+> Estructura basada en la organización real del proyecto (arquitectura por capas: `domain`, `infrastructure`, `presentation`).
+
+---
+
+## ✅ Requisitos
 
 Asegúrate de tener instalado lo siguiente en tu entorno de desarrollo:
 
 - **Node.js** (versión 18 o superior recomendada).
 - **npm**.
 - **Expo CLI**.
-- **EAS CLI** (opcional para generar compilaciones).
+- **EAS CLI** (opcional, para generar compilaciones).
 - **Expo Go** instalado en tu dispositivo móvil para realizar pruebas locales.
 
 ---
 
-##  Instalación
+## 🚀 Instalación
 
 ### 1. Clonar el repositorio
 
@@ -46,25 +124,25 @@ npm install
 
 ---
 
-##  Configuración de Firebase
+## ⚙️ Configuración de Firebase
 
-La aplicación utiliza **Firebase** para la autenticación de usuarios y almacenamiento de información.
+La aplicación utiliza **Firebase** para la autenticación de usuarios y el almacenamiento de información.
 
 Configura tus credenciales en:
 
 `src/infrastructure/firebase/firebaseConfig.ts`
 
-Asegúrate de tener habilitado:
+Asegúrate de tener habilitado en la consola de Firebase:
 
--  **Authentication**
+- **Authentication**
   - Email/Password
--  **Firestore Database** o **Realtime Database**
+- **Firestore Database** o **Realtime Database**
 
->  No compartas públicamente tus credenciales o claves privadas de Firebase.
+> ⚠️ No compartas públicamente tus credenciales o claves privadas de Firebase.
 
 ---
 
-##  Cómo ejecutar el proyecto
+## ▶️ Cómo ejecutar el proyecto
 
 Para iniciar el servidor de desarrollo con Metro Bundler:
 
@@ -72,15 +150,15 @@ Para iniciar el servidor de desarrollo con Metro Bundler:
 npx expo start
 ```
 
-###  Dispositivo físico
+### 📱 Dispositivo físico
 
 Escanea el código QR que aparece en la terminal utilizando **Expo Go** en Android o iOS.
 
-###  Emulador Android
+### 🤖 Emulador Android
 
 Presiona la tecla `a` en la terminal para abrir el emulador de Android.
 
-###  Simulador iOS
+### 🍎 Simulador iOS
 
 Presiona la tecla `i` en la terminal para abrir el simulador de iOS.
 
@@ -97,21 +175,21 @@ Presiona la tecla `i` en la terminal para abrir el simulador de iOS.
 
 ---
 
-##  Cómo probar el CRUD de Pedidos
+## 📝 Cómo probar el CRUD de Pedidos
 
-Una vez autenticado, podrás gestionar los pedidos mediante las operaciones CRUD.
+Una vez autenticado, podrás gestionar los pedidos mediante las siguientes operaciones:
 
-###  Crear — Create
+### ➕ Crear — Create
 
 Ve al formulario de pedidos para registrar un nuevo pedido seleccionando productos del catálogo.
 
-###  Leer — Read
+### 📖 Leer — Read
 
 Visualiza la lista completa de pedidos registrados desde:
 
 `ListadoPedidosScreen`
 
-###  Actualizar — Update
+### ✏️ Actualizar — Update
 
 1. Selecciona un pedido.
 2. Accede al detalle.
@@ -119,7 +197,7 @@ Visualiza la lista completa de pedidos registrados desde:
 4. Modifica los datos.
 5. Guarda los cambios.
 
-### Eliminar — Delete
+### 🗑️ Eliminar — Delete
 
 1. Accede al detalle del pedido.
 2. Selecciona **Eliminar**.
@@ -132,11 +210,11 @@ Visualiza la lista completa de pedidos registrados desde:
 
 La aplicación implementa almacenamiento local mediante **expo-sqlite** para mejorar la persistencia y caché de datos offline en el dispositivo.
 
-Los datos locales son gestionados automáticamente por la aplicación durante las operaciones correspondientes.
+Los datos locales son gestionados automáticamente por la aplicación durante las operaciones correspondientes (creación, edición y eliminación de pedidos), permitiendo que la información esté disponible incluso sin conexión a internet.
 
 ---
 
-##  Cómo probar el consumo de API REST
+## 🌐 Cómo probar el consumo de API REST
 
 Dirígete a la pantalla:
 
@@ -146,9 +224,9 @@ La aplicación realizará una petición HTTP mediante `fetch` a la API REST conf
 
 Podrás visualizar en tiempo real:
 
--  Imágenes
--  Nombres de productos
--  Precios unitarios
+- 🖼️ Imágenes
+- 🏷️ Nombres de productos
+- 💲 Precios unitarios
 
 ---
 
@@ -165,9 +243,9 @@ Para comprobar la sincronización con Firebase:
 
 ---
 
-##  Cómo generar APK / AAB
+## 📦 Cómo generar APK / AAB
 
-###  Generar APK para Android
+### 🤖 Generar APK para Android
 
 Para generar un archivo `.apk` instalable directamente en Android utilizando EAS:
 
@@ -177,9 +255,7 @@ eas build -p android --profile preview --clear-cache
 
 Al finalizar la compilación, EAS proporcionará un enlace de descarga.
 
-
-
-
+---
 
 <p align="center">
   📱 <strong>PedidosApp</strong>
